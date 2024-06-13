@@ -16,6 +16,7 @@ class TestGame(TestCase):
             pass
 
     def test_exception_when_invalid_input(self):
-        test_cases = [None, '12', '1234']
+        test_cases = [None, '12', '1234', '12s']
         for tc in test_cases:
-            self.assert_illegal_argument(tc)
+            with self.subTest(tc):
+                self.assert_illegal_argument(tc)
