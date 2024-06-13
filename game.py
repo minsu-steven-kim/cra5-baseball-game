@@ -6,6 +6,8 @@ class Game:
         self.assert_legal_value(number)
         if number == self.question:
             return GameResult(True, 3, 0)
+        else:
+            return GameResult(False, 0, 0)
 
     def assert_legal_value(self, number):
         if number is None:

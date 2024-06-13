@@ -29,3 +29,12 @@ class TestGame(TestCase):
         self.assertTrue(result.get_solved())
         self.assertEqual(3, result.get_strikes())
         self.assertEqual(0, result.get_balls())
+
+    def test_result_when_unmatched_input(self):
+        self.game.question = '123'
+        result: GameResult = self.game.guess('456')
+
+        self.assertIsNotNone(result)
+        self.assertFalse(result.get_solved())
+        self.assertEqual(0, result.get_strikes())
+        self.assertEqual(0, result.get_balls())
