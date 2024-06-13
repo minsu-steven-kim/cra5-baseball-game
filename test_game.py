@@ -15,7 +15,7 @@ class TestGame(TestCase):
         except TypeError:
             pass
 
-    def assert_correct_result(self, result, solved, strikes, balls):
+    def assert_proper_result(self, result, solved, strikes, balls):
         self.assertIsNotNone(result)
         self.assertEqual(solved, result.get_solved())
         self.assertEqual(strikes, result.get_strikes())
@@ -32,8 +32,12 @@ class TestGame(TestCase):
 
     def test_result_when_matched_input(self):
         self.generate_question('123')
-        self.assert_correct_result(self.game.guess('123'), True, 3, 0)
+        self.assert_proper_result(self.game.guess('123'), True, 3, 0)
 
     def test_result_when_unmatched_input(self):
         self.generate_question('123')
-        self.assert_correct_result(self.game.guess('456'), False, 0, 0)
+        self.assert_proper_result(self.game.guess('456'), False, 0, 0)
+
+    def test_result_when_some_matched_input(self):
+        self.generate_question('123')
+        self.assert_proper_result(self.game.guess('120'), False, 2, 0)

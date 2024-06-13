@@ -7,7 +7,13 @@ class Game:
         if number == self.question:
             return GameResult(True, 3, 0)
         else:
-            return GameResult(False, 0, 0)
+            strikes = 0
+            for i in range(len(self.question)):
+                digit = number[i]
+                index = self.question.find(digit)
+                if index == i:
+                    strikes += 1
+            return GameResult(False, strikes, 0)
 
     def assert_legal_value(self, number):
         if number is None:
