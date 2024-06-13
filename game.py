@@ -4,7 +4,8 @@ class Game:
 
     def guess(self, number):
         self.assert_legal_value(number)
-        return GameResult(True, 3, 0)
+        if number == self.question:
+            return GameResult(True, 3, 0)
 
     def assert_legal_value(self, number):
         if number is None:
@@ -14,16 +15,24 @@ class Game:
         for digit in number:
             if not ord('0') <= ord(digit) <= ord('9'):
                 raise TypeError()
-        if self.isDuplicatedDigit(number):
+        if self.is_duplicated_digit(number):
             raise TypeError()
 
-    def isDuplicatedDigit(self, number):
+    def is_duplicated_digit(self, number):
         return number[0] == number[1] or number[1] == number[2] or number[2] == number[0]
 
 
 class GameResult:
     def __init__(self, solved, strikes, balls):
-        self.solved = solved
-        self.strikes = strikes
-        self.balls = balls
+        self.__solved = solved
+        self.__strikes = strikes
+        self.__balls = balls
 
+    def get_solved(self):
+        return self.__solved
+
+    def get_strikes(self):
+        return self.__strikes
+
+    def get_balls(self):
+        return self.__balls
