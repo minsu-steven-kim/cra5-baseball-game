@@ -40,4 +40,11 @@ class TestGame(TestCase):
 
     def test_result_when_some_matched_input(self):
         self.generate_question('123')
-        self.assert_proper_result(self.game.guess('120'), False, 2, 0)
+        test_cases = [
+            ('120', False, 2, 0),
+            ('061', False, 0, 1),
+            ('136', False, 1, 1),
+        ]
+        for tc in test_cases:
+            with self.subTest(tc):
+                self.assert_proper_result(self.game.guess(tc[0]), tc[1], tc[2], tc[3])

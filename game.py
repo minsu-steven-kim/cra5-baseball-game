@@ -8,10 +8,13 @@ class Game:
             return GameResult(True, 3, 0)
         else:
             strikes = 0
+            balls = 0
             for i in range(len(self.question)):
                 if self.question.find(number[i]) == i:
                     strikes += 1
-            return GameResult(False, strikes, 0)
+                elif self.question.find(number[i]) >= 0:
+                    balls += 1
+            return GameResult(False, strikes, balls)
 
     def assert_legal_value(self, number):
         if number is None:
