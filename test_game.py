@@ -8,7 +8,7 @@ class TestGame(TestCase):
         super().setUp()
         self.game = Game()
 
-    def assert_illegal_argument(self, number):
+    def assert_legal_argument(self, number):
         try:
             self.game.guess(number)
             self.fail()
@@ -19,4 +19,4 @@ class TestGame(TestCase):
         test_cases = [None, '12', '1234', '12s', '121']
         for tc in test_cases:
             with self.subTest(tc):
-                self.assert_illegal_argument(tc)
+                self.assert_legal_argument(tc)
