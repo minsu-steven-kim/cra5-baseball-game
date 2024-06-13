@@ -4,17 +4,26 @@ class Game:
 
     def guess(self, number):
         self.assert_legal_value(number)
-        if number == self.question:
-            return GameResult(True, 3, 0)
+        if self.is_solved(number):
+            return self.get_success_game_result()
         else:
-            strikes = 0
-            balls = 0
-            for i in range(len(self.question)):
-                if self.question.find(number[i]) == i:
-                    strikes += 1
-                elif self.question.find(number[i]) >= 0:
-                    balls += 1
-            return GameResult(False, strikes, balls)
+            return self.get_fail_game_result(number)
+
+    def get_fail_game_result(self, number):
+        strikes = 0
+        balls = 0
+        for i in range(len(self.question)):
+            if self.question.find(number[i]) == i:
+                strikes += 1
+            elif self.question.find(number[i]) >= 0:
+                balls += 1
+        return GameResult(False, strikes, balls)
+
+    def get_success_game_result(self):
+        return GameResult(True, 3, 0)
+
+    def is_solved(self, number):
+        return number == self.question
 
     def assert_legal_value(self, number):
         if number is None:
